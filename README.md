@@ -19,7 +19,7 @@ The test in [`tests/checkout.spec.ts`](tests/checkout.spec.ts) walks through a f
 | [Playwright](https://playwright.dev/) | Browser automation and test runner |
 | TypeScript | The language the tests are written in |
 | Page Object Model | Keeps page selectors and actions in `pages/`, so the test reads like a story |
-| dotenv | Optionally loads your own login details from a `.env` file |
+| dotenv | Loads your login details from a `.env` file |
 | GitHub Actions | Runs the test automatically on every push (`.github/workflows/playwright.yml`) |
 
 ## Project layout
@@ -27,7 +27,6 @@ The test in [`tests/checkout.spec.ts`](tests/checkout.spec.ts) walks through a f
 ```
 pages/    One file per page of the shop (login, product, cart, checkout)
 tests/    The test itself
-utils/    Login details used by the test
 ```
 
 ## How to run it
@@ -74,19 +73,19 @@ If the test fails, Playwright usually opens the report for you automatically.
 
 ## Login details
 
-The test uses a **shared demo user** (`JaneUser`) on the public practice site, so there is nothing to set up. It works straight after you clone the project.
-
-If you would rather use your own account, a sample is provided:
+The test reads the login from a `.env` file, which is never committed to git.
 
 1. Copy `.env.example` to `.env`.
-2. Put your own username and password in it:
+2. Put your username and password in it:
    ```
    USER_NAME=your-username
    PASSWORD=your-password
    ```
-3. Run the test as usual. Your `.env` file replaces the shared user, and it is never committed to git.
+3. Run the test as usual.
+
+The sample file uses the shared demo user (`JaneUser`) on the public practice site, so it works as is.
 
 ## Good to know
 
-- The shared demo user is used by everyone, so two people running the test at the same time can get in each other's way. Use your own account in `.env` if that happens.
+- If you keep the shared demo user, two people running the test at the same time can get in each other's way. Use your own account in `.env` if that happens.
 - Each run places a real order on the practice site. The orders can't be deleted, but they do no harm.

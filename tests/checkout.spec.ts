@@ -3,7 +3,6 @@ import { LoginPage } from '../pages/LoginPage';
 import { ProductPage } from '../pages/ProductPage';
 import { CartPage } from '../pages/CartPage';
 import { CheckoutPage } from '../pages/CheckoutPage';
-import { credentials } from '../utils/credentials';
 
 test('Login, add to cart and checkout', async ({ page }) => {
   const productName = 'Jersey Cotton Striped Polo Shirt';
@@ -13,7 +12,7 @@ test('Login, add to cart and checkout', async ({ page }) => {
   const checkoutPage = new CheckoutPage(page);
 
   await loginPage.goto();
-  await loginPage.login(credentials.username, credentials.password);
+  await loginPage.login(process.env.USER_NAME!, process.env.PASSWORD!);
   await loginPage.expectLoggedIn();
 
   await productPage.openCategory('Apparel & accessories');
